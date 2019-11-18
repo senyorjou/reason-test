@@ -1,21 +1,25 @@
 open Belt;
 
+type item = {
+  id: int,
+  name: string,
+  value: string,
+};
+
 [@react.component]
 let make = () => {
-  let (items, setItems) = React.useState(() => ["One", "Two"]);
+  let (items, setItems) = React.useState(() => ["AA", "BB"]);
 
-  // let dispatch = () => {
-  //   setItems(["AA", "BB"]);
-  // };
-
-  let todos = List.map(items, item => <Entry label=item />);
+  let add = () => {
+    setItems(_ => ["foo", ...items]);
+  };
 
   <div>
     <h1 className="is-size-2"> {ReasonReact.string("Create")} </h1>
-    <form action="" className="box">
+    <form className="box">
       <div className="field">
         <div className="control">
-          <input placeholder="label" className="input" />
+          <input onChange={_ => ()} placeholder="label" className="input" />
         </div>
       </div>
       <div className="field">
@@ -24,26 +28,15 @@ let make = () => {
         </div>
       </div>
       <div className="field">
-        <button onClick={_event => ()} className="button is-success">
+        <a onClick={_event => add()} className="button is-success">
           {ReasonReact.string("Add")}
-        </button>
+        </a>
       </div>
     </form>
-    // <ul> {ReasonReact.array(List.toArray(todos))} </ul>
-    <ul> {
-      ReasonReact.Array(List.map(items, item => <Entry label=item key=item/>))
-    }
+    <ul>
+      {List.map(items, item => <Entry key=item label=item />)
+       |> List.toArray
+       |> ReasonReact.array}
+    </ul>
   </div>;
 };
-
-  //   <ul>
-  //         {
-  //           ReasonReact.array(
-  //             List.map(
-  //               (invoice: Invoice.t) => <Invoice invoice key={invoice.id} />,
-  //               invoices,
-  //             )
-  //             |> Array.of_list,
-  //           )
-  //         }
-  //  </ul>

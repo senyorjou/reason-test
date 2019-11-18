@@ -5,9 +5,7 @@ var React = require("react");
 
 function Entry(Props) {
   var label = Props.label;
-  return React.createElement("li", {
-              key: label
-            }, label);
+  return React.createElement("li", undefined, label);
 }
 
 var make = Entry;
