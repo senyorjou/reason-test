@@ -23,6 +23,10 @@ function Create(Props) {
         }));
   var setLabelValue = match$1[1];
   var labelValue = match$1[0];
+  var match$2 = React.useState((function () {
+          return "";
+        }));
+  var setItemValue = match$2[1];
   return React.createElement("div", undefined, React.createElement("h1", {
                   className: "is-size-2"
                 }, "Create"), React.createElement("form", {
@@ -34,8 +38,8 @@ function Create(Props) {
                         }, React.createElement("input", {
                               className: "input",
                               placeholder: "label",
-                              onChange: (function ($$event) {
-                                  return Curry._1(setLabelValue, $$event.target.value);
+                              onChange: (function (param) {
+                                  return Curry._1(setLabelValue, param.target.value);
                                 })
                             }))), React.createElement("div", {
                       className: "field"
@@ -43,7 +47,10 @@ function Create(Props) {
                           className: "control"
                         }, React.createElement("input", {
                               className: "input",
-                              placeholder: "value"
+                              placeholder: "value",
+                              onChange: (function (param) {
+                                  return Curry._1(setItemValue, param.target.value);
+                                })
                             }))), React.createElement("div", {
                       className: "field"
                     }, React.createElement("a", {

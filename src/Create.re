@@ -10,13 +10,10 @@ type item = {
 let make = () => {
   let (items, setItems) = React.useState(() => ["AA", "BB"]);
   let (labelValue, setLabelValue) = React.useState(() => "");
+  let (itemValue, setItemValue) = React.useState(() => "");
 
-  let add = value => {
-    setItems(_ => [labelValue, ...items]);
-  };
-
-  let changeLabel = value => {
-    setLabelValue(value);
+  let change = (dispatcher, event) => {
+    dispatcher(ReactEvent.Form.target(event)##value)
   };
 
   <div>
@@ -25,9 +22,7 @@ let make = () => {
       <div className="field">
         <div className="control">
           <input
-            onChange={event =>
-              changeLabel(ReactEvent.Form.target(event)##value)
-            }
+            onChange=change(setLabelValue)
             placeholder="label"
             className="input"
           />
@@ -35,11 +30,11 @@ let make = () => {
       </div>
       <div className="field">
         <div className="control">
-          <input placeholder="value" className="input" />
+          <input onChange=change(setItemValue) placeholder="value" className="input" />
         </div>
       </div>
       <div className="field">
-        <a onClick={_event => add()} className="button is-success">
+        <a onClick={_event => setItems(_=> [labelValue, ...items])} className="button is-success">
           {ReasonReact.string("Add")}
         </a>
       </div>
