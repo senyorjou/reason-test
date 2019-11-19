@@ -9,9 +9,14 @@ type item = {
 [@react.component]
 let make = () => {
   let (items, setItems) = React.useState(() => ["AA", "BB"]);
+  let (labelValue, setLabelValue) = React.useState(() => "");
 
-  let add = () => {
-    setItems(_ => ["foo", ...items]);
+  let add = value => {
+    setItems(_ => [labelValue, ...items]);
+  };
+
+  let changeLabel = value => {
+    setLabelValue(value);
   };
 
   <div>
@@ -19,7 +24,13 @@ let make = () => {
     <form className="box">
       <div className="field">
         <div className="control">
-          <input onChange={_ => ()} placeholder="label" className="input" />
+          <input
+            onChange={event =>
+              changeLabel(ReactEvent.Form.target(event)##value)
+            }
+            placeholder="label"
+            className="input"
+          />
         </div>
       </div>
       <div className="field">
